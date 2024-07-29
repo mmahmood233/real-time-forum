@@ -1,0 +1,43 @@
+2024/07/29 21:25:31 Starting server on :8800
+2024/07/29 21:26:04 Starting server on :8800
+2024/07/29 21:38:59 Starting server on :8800
+2024/07/29 21:40:47 Starting server on :8800
+2024/07/29 21:42:31 Starting server on :8800
+2024/07/29 21:42:44 Error inserting user: no such column: password
+2024/07/29 21:43:19 Error inserting user: no such column: password
+2024/07/29 21:43:20 Error inserting user: no such column: password
+2024/07/29 21:43:20 Error inserting user: no such column: password
+2024/07/29 21:43:32 Error inserting user: no such column: password
+2024/07/29 21:46:17 Starting server on :8800
+2024/07/29 21:46:28 Received registration request: nickname=aa, age=21, gender=male, firstname=aa, lastname=aa, email=aa@aa.aa
+2024/07/29 21:46:28 Error querying user: no such column: password
+2024/07/29 21:46:28 Error checking existing user by email: no such column: password
+2024/07/29 21:46:28 Error inserting user: no such column: password
+2024/07/29 21:47:26 Starting server on :8800
+2024/07/29 21:47:41 Received registration request: nickname=aa, age=21, gender=male, firstname=aa, lastname=aa, email=aa@aa.aa
+2024/07/29 21:47:41 New user registered with ID: 1
+2024/07/29 21:47:41 User registered successfully: aa
+2024/07/29 21:51:31 Starting server on :8800
+2024/07/29 21:51:48 Received registration request: nickname=aa, age=21, gender=male, firstname=aa, lastname=aa, email=aa@aa.aa
+2024/07/29 21:51:48 User with email aa@aa.aa already exists
+2024/07/29 21:51:48 Error inserting user: user with this email already exists
+2024/07/29 21:51:58 Received registration request: nickname=xx, age=21, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/07/29 21:51:58 New user registered with ID: 2
+2024/07/29 21:51:58 User registered successfully: xx
+2024/07/29 21:57:09 Starting server on :8800
+2024/07/29 21:59:26 Starting server on :8800
+2024/07/29 21:59:48 Received registration request: nickname=zz, age=21, gender=male, firstname=zz, lastname=zz, email=zz@zz.zz
+2024/07/29 21:59:48 New user registered with ID: 3
+2024/07/29 21:59:48 User registered successfully: zz
+2024/07/29 22:00:33 Received registration request: nickname=pp, age=21, gender=male, firstname=pp, lastname=pp, email=pp@pp.pp
+2024/07/29 22:00:33 New user registered with ID: 4
+2024/07/29 22:00:33 User registered successfully: pp
+2024/07/29 22:04:17 Received registration request: nickname=zz, age=21, gender=male, firstname=zz, lastname=zz, email=zz@zz.zz
+2024/07/29 22:04:17 User with email zz@zz.zz already exists
+2024/07/29 22:04:17 Error inserting user: user with this email already exists
+2024/07/29 22:04:21 Received registration request: nickname=zzz, age=21, gender=male, firstname=zz, lastname=zz, email=zz@zz.zzz
+2024/07/29 22:04:21 New user registered with ID: 5
+2024/07/29 22:04:21 User registered successfully: zzz
+2024/07/29 22:04:46 Received registration request: nickname=qq, age=21, gender=male, firstname=qq, lastname=qq, email=qq@qq.qq
+2024/07/29 22:04:46 New user registered with ID: 6
+2024/07/29 22:04:46 User registered successfully: qq
