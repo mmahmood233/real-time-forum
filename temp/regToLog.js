@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage(message);
             setTimeout(() => {
                 showLoginForm();
-            }, 300);
+            }, 2000);
         })
         .catch(error => {
             showMessage(error.message, true);
@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(message => {
             showMessage(message);
+            // Call loginSuccess function from main.js
+            if (window.loginSuccess) {
+                window.loginSuccess();
+            }
         })
         .catch(error => {
             showMessage(error.message, true);

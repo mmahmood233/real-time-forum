@@ -41,3 +41,28 @@
 2024/07/29 22:04:46 Received registration request: nickname=qq, age=21, gender=male, firstname=qq, lastname=qq, email=qq@qq.qq
 2024/07/29 22:04:46 New user registered with ID: 6
 2024/07/29 22:04:46 User registered successfully: qq
+2024/07/29 22:09:53 Starting server on :8800
+2024/07/29 22:22:38 Starting server on :8800
+2024/07/29 22:22:58 Received registration request: nickname=zz, age=222, gender=male, firstname=zz, lastname=zz, email=zz@zz.zz
+2024/07/29 22:22:58 New user registered with ID: 1
+2024/07/29 22:22:58 User registered successfully: zz
+2024/07/29 22:24:54 Starting server on :8800
+2024/07/29 22:25:06 Received registration request: nickname=aa, age=22, gender=male, firstname=aa, lastname=aa, email=aa@aa.aa
+2024/07/29 22:25:06 New user registered with ID: 2
+2024/07/29 22:25:06 User registered successfully: aa
+2024/07/29 22:27:59 Starting server on :8800
+2024/07/29 22:28:12 Received registration request: nickname=qq, age=11, gender=male, firstname=qq, lastname=qq, email=qq@qq.qq
+2024/07/29 22:28:12 New user registered with ID: 3
+2024/07/29 22:28:12 User registered successfully: qq
+2024/07/29 22:31:13 Starting server on :8800
+2024/07/29 22:31:29 Received registration request: nickname=pp, age=11, gender=male, firstname=pp, lastname=pp, email=pp@pp.pp
+2024/07/29 22:31:29 New user registered with ID: 4
+2024/07/29 22:31:29 User registered successfully: pp
+2024/07/29 22:31:40 New post created - ID: 1, Content: asdasdasd, Category: general
+2024/07/29 22:38:11 Starting server on :8800
+2024/07/29 22:38:26 Starting server on :8800
+2024/07/29 22:39:05 Received registration request: nickname=zz, age=11, gender=male, firstname=zz, lastname=zz, email=zz@zz.zz
+2024/07/29 22:39:05 New user registered with ID: 1
+2024/07/29 22:39:05 User registered successfully: zz
+2024/07/29 22:40:20 New post created - ID: 1, Content: mhcjhm, Category: general
+2024/07/29 22:44:36 Starting server on :8800
