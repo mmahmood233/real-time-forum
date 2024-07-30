@@ -66,3 +66,45 @@
 2024/07/29 22:39:05 User registered successfully: zz
 2024/07/29 22:40:20 New post created - ID: 1, Content: mhcjhm, Category: general
 2024/07/29 22:44:36 Starting server on :8800
+2024/07/30 22:05:47 Starting server on :8800
+2024/07/30 22:06:54 Starting server on :8800
+2024/07/30 22:07:13 Received registration request: nickname=xx, age=55, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/07/30 22:07:13 New user registered with ID: 2
+2024/07/30 22:07:13 User registered successfully: xx
+2024/07/30 22:07:18 Attempting to remove session from database: JDJhJDEwJDZjb0VrNHRpak9ycVZRSWp6L3pZNS5nNE5YZ212UGNKOFQ4WnY2UW5LaWc0NmQ5TDI4di9X
+2024/07/30 22:07:18 Rows affected: 1
+2024/07/30 22:07:49 New post created - ID: 2, Content: sad, Category: general
+2024/07/30 22:31:06 Starting server on :8800
+2024/07/30 22:31:19 New post created - ID: 3, Content: asd, Category: general
+2024/07/30 22:32:36 Starting server on :8800
+2024/07/30 22:37:01 Starting server on :8800
+2024/07/30 22:38:10 Starting server on :8800
+2024/07/30 22:38:22 New post created - ID: 4, Content: asd, Category: tech
+2024/07/30 22:42:17 Starting server on :8800
+2024/07/30 22:44:13 Starting server on :8800
+2024/07/30 22:44:30 Starting server on :8800
+2024/07/30 22:44:42 Received registration request: nickname=xx, age=55, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/07/30 22:44:42 New user registered with ID: 1
+2024/07/30 22:44:42 User registered successfully: xx
+2024/07/30 22:44:54 New post created - ID: 1, Content: asd, Category: general
+2024/07/30 22:48:25 Starting server on :8800
+2024/07/30 22:48:40 Received registration request: nickname=xx, age=55, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/07/30 22:48:40 New user registered with ID: 1
+2024/07/30 22:48:40 User registered successfully: xx
+2024/07/30 22:48:50 New post created - ID: 1, Content: asd, Category: tech
+2024/07/30 22:51:52 Starting server on :8800
+2024/07/30 22:52:01 New post created - ID: 2, Content: sad, Category: tech
+2024/07/30 22:53:39 Starting server on :8800
+2024/07/30 22:53:53 New post created - ID: 3, Content: asd, Category: general
+2024/07/30 22:53:55 Response: {"CommentID":4,"PostID":3,"UserID":1,"CommentContent":"asd","CreatedAt":"2024-07-30T22:53:55.399383696+03:00","Username":"","LikeCount":0,"DislikeCount":0}
+2024/07/30 22:54:13 Response: {"CommentID":5,"PostID":3,"UserID":1,"CommentContent":"asd","CreatedAt":"2024-07-30T22:54:13.629551467+03:00","Username":"","LikeCount":0,"DislikeCount":0}
+2024/07/30 22:55:22 Starting server on :8800
+2024/07/30 22:55:53 Response: {"CommentID":7,"PostID":3,"UserID":1,"CommentContent":"checkcheckcheck","CreatedAt":"2024-07-30T22:55:53.201643145+03:00","Username":"","LikeCount":0,"DislikeCount":0}
+2024/07/30 22:57:19 Starting server on :8800
+2024/07/30 22:57:37 Response: {"CommentID":9,"PostID":3,"UserID":1,"CommentContent":"sad","CreatedAt":"2024-07-30T22:57:37.328170136+03:00","Username":"","LikeCount":0,"DislikeCount":0}
+2024/07/30 23:04:08 Starting server on :8800
+2024/07/30 23:04:20 New post created - ID: 4, Content: asd, Category: general
+2024/07/30 23:05:32 Starting server on :8800
+2024/07/30 23:05:59 New post created - ID: 5, Content: asd, Category: tech
+2024/07/30 23:07:05 Response: {"CommentID":12,"PostID":5,"UserID":1,"CommentContent":"asd","CreatedAt":"2024-07-30T23:07:05.723954945+03:00","Username":"","LikeCount":0,"DislikeCount":0}
+2024/07/30 23:07:17 Response: {"CommentID":13,"PostID":5,"UserID":1,"CommentContent":"asd","CreatedAt":"2024-07-30T23:07:17.500390774+03:00","Username":"","LikeCount":0,"DislikeCount":0}

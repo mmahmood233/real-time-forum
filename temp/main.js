@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const postFeed = document.querySelector('.post-feed');
     const createPostButton = document.getElementById('create-post-button');
     const backToMainButton = document.getElementById('back-to-main');
+    const logoutButton = document.getElementById('logout-button');
+    const goToLoginButton = document.getElementById('go-to-login');
+    const goToRegisterButton = document.getElementById('go-to-register');
 
     function showMainPage() {
         document.querySelector('.auth-container').style.display = 'none';
@@ -15,6 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function showCreatePostPage() {
         mainPage.style.display = 'none';
         createPostPage.style.display = 'block';
+    }
+
+    function showRegisterForm() {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('register-form').style.display = 'block';
+    }
+
+    function showLoginForm() {
+        document.getElementById('register-form').style.display = 'none';
+        document.getElementById('login-form').style.display = 'block';
     }
 
     function loadPosts() {
@@ -32,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function addPostToFeed(post) {
         const postElement = document.createElement('div');
         postElement.className = 'post';
+        postElement.dataset.id = post.id; // Add data-id attribute for identification
         postElement.innerHTML = `
             <h3>${post.author}</h3>
             <p>${post.content}</p>
@@ -51,27 +65,47 @@ document.addEventListener('DOMContentLoaded', function() {
         postFeed.appendChild(postElement);
     }
 
-    function addCommentToPost(postId, content) {
-        fetch('/add-comment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ postId, content }),
-        })
-        .then(response => response.json())
-        .then(comment => {
-            const post = document.querySelector(`.post[data-id="${postId}"]`);
-            const commentElement = document.createElement('div');
-            commentElement.className = 'comment';
-            commentElement.textContent = comment.content;
-            post.querySelector('.comments').appendChild(commentElement);
-        })
-        .catch(error => {
-            console.error('Error adding comment:', error);
-        });
-    }
+function addCommentToPost(postId, content) {
+    fetch('/add-comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ postID: postId, commentCont: content }),
+    })
+    .then(response => response.text()) // Read response as text first
+    .then(text => {
+        console.log('Server response:', text); // Log raw response text
+        try {
+            const comment = JSON.parse(text); // Try parsing the JSON
+            console.log('Parsed comment:', comment); // Log parsed comment object
 
+            // Check if the response has the expected structure
+            if (!comment || !comment.CommentContent) {
+                console.error('Invalid comment response:', comment);
+                return;
+            }
+
+            const post = document.querySelector(`.post[data-id="${postId}"]`);
+            if (post) {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.textContent = comment.CommentContent;
+                // Append comment to the post's comments section
+                post.querySelector('.comments').appendChild(commentElement);
+            } else {
+                console.error('Post not found:', postId);
+            }
+        } catch (error) {
+            console.error('Failed to parse JSON response:', error);
+        }
+    })
+    .catch(error => {
+        console.error('Error adding comment:', error);
+    });
+}
+ 
+    
     document.getElementById('post-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const content = this.content.value;
@@ -103,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    document.getElementById('logout-button').addEventListener('click', function() {
+    logoutButton.addEventListener('click', function() {
         fetch('/logout', { method: 'POST' })
         .then(response => {
             if (response.ok) {
@@ -120,6 +154,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     createPostButton.addEventListener('click', showCreatePostPage);
     backToMainButton.addEventListener('click', showMainPage);
+    goToLoginButton.addEventListener('click', showLoginForm);
+    goToRegisterButton.addEventListener('click', showRegisterForm);
 
     // Expose loginSuccess function to be called from regToLog.js
     window.loginSuccess = showMainPage;

@@ -49,12 +49,16 @@ func main() {
     http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
         forum.Logout(w, r, database)
     })
-	http.HandleFunc("/create-post", func(w http.ResponseWriter, r *http.Request) {
-		forum.CreatePost(w, r, database)
-	})
-	http.HandleFunc("/get-posts", func(w http.ResponseWriter, r *http.Request) {
-		forum.GetPosts(w, r, database)
-	})
+    http.HandleFunc("/create-post", func(w http.ResponseWriter, r *http.Request) {
+        forum.CreatePost(w, r, database)
+    })
+    http.HandleFunc("/get-posts", func(w http.ResponseWriter, r *http.Request) {
+        forum.GetPosts(w, r, database)
+    })
+    http.HandleFunc("/add-comment", func(w http.ResponseWriter, r *http.Request) {
+        forum.AddComment(w, r, database)
+    })
+    
 
     // Start the web server
     log.Println("Starting server on :8800")
