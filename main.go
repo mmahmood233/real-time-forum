@@ -56,7 +56,7 @@ func main() {
         forum.GetPosts(w, r, database)
     })
     http.HandleFunc("/add-comment", func(w http.ResponseWriter, r *http.Request) {
-        forum.AddComment(w, r, database)
+        forum.CreateComment(w, r, database)
     })
     
 

@@ -37,13 +37,41 @@
             border-radius: 4px;
         }
         .comments {
-            margin-left: 20px;
+            margin-left: 20px; /* Space between post and comments */
+            border-top: 1px solid #ddd; /* Light border to separate comments from post content */
+            padding-top: 10px; /* Padding to give space above comments */
         }
         .comment {
-            background-color: #f0f0f0;
-            padding: 5px;
-            margin-top: 5px;
-            border-radius: 4px;
+            background-color: #ffffff; /* White background for comments */
+            padding: 8px 12px; /* Padding for a better visual appearance */
+            margin-top: 10px; /* Space between comments */
+            border: 1px solid #ddd; /* Border to outline each comment */
+            border-radius: 4px; /* Rounded corners for comments */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+        }
+        .comment-form {
+            margin-top: 15px; /* Space above the comment form */
+            border-top: 1px solid #ddd; /* Border to separate form from post */
+            padding-top: 10px; /* Padding for form content */
+        }
+        .comment-form textarea {
+            padding: 8px; /* Padding inside textarea */
+            border-radius: 4px; /* Rounded corners for textarea */
+            border: 1px solid #ddd; /* Border for textarea */
+            width: 100%; /* Full width */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+        .comment-form button {
+            padding: 8px 12px; /* Padding inside button */
+            background-color: #007bff; /* Button background color */
+            color: white; /* Button text color */
+            border: none; /* Remove border */
+            border-radius: 4px; /* Rounded corners for button */
+            cursor: pointer; /* Pointer cursor on hover */
+            margin-top: 10px; /* Space above button */
+        }
+        .comment-form button:hover {
+            background-color: #0056b3; /* Darker color on hover */
         }
         .message {
             margin-bottom: 1rem;
@@ -79,54 +107,58 @@
         button:hover {
             background-color: #0056b3;
         }
-        #login-form {
+        #login-form-element {
             display: none;
         }
         textarea {
             min-height: 100px;
             resize: vertical;
         }
-        /* CSS for comments section */
-.comments {
-    margin-left: 20px; /* Space between post and comments */
-    border-top: 1px solid #ddd; /* Light border to separate comments from post content */
-    padding-top: 10px; /* Padding to give space above comments */
+        .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#comments-list {
+    margin-bottom: 20px;
 }
 
 .comment {
-    background-color: #ffffff; /* White background for comments */
-    padding: 8px 12px; /* Padding for a better visual appearance */
-    margin-top: 10px; /* Space between comments */
-    border: 1px solid #ddd; /* Border to outline each comment */
-    border-radius: 4px; /* Rounded corners for comments */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
-}
-
-/* Styling for comment form */
-.comment-form {
-    margin-top: 15px; /* Space above the comment form */
-    border-top: 1px solid #ddd; /* Border to separate form from post */
-    padding-top: 10px; /* Padding for form content */
-}
-
-.comment-form input {
-    padding: 8px; /* Padding inside input field */
-    border-radius: 4px; /* Rounded corners for input field */
-    border: 1px solid #ddd; /* Border for input field */
-}
-
-.comment-form button {
-    padding: 8px 12px; /* Padding inside button */
-    background-color: #007bff; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Rounded corners for button */
-    cursor: pointer; /* Pointer cursor on hover */
-    margin-top: 10px; /* Space above button */
-}
-
-.comment-form button:hover {
-    background-color: #0056b3; /* Darker color on hover */
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
     </style>
@@ -138,7 +170,7 @@
             
             <div id="register-form">
                 <h2>Register</h2>
-                <form id="registration-form">
+                <form id="registration-form" method="post">
                     <input type="text" name="nickname" placeholder="Nickname" required>
                     <input type="number" name="age" placeholder="Age" required>
                     <select name="gender" required>
@@ -155,9 +187,9 @@
                 <p>Already have an account? <button id="go-to-login">Log in</button></p>
             </div>
 
-            <div id="login-form" style="display: none;">
+            <div id="login-form-element">
                 <h2>Login</h2>
-                <form id="login-form-element">
+                <form id="login-form" method="post">
                     <input type="text" name="username" placeholder="Username or Email" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <button type="submit">Login</button>
@@ -179,7 +211,7 @@
 
         <div class="create-post-page">
             <h2>Create a New Post</h2>
-            <form id="post-form">
+            <form id="post-form" method="post">
                 <textarea name="content" placeholder="What's on your mind?" required></textarea>
                 <select name="category" required>
                     <option value="">Select Category</option>
@@ -190,6 +222,17 @@
                 <button type="submit">Create Post</button>
             </form>
             <button id="back-to-main">Back to Main Page</button>
+        </div>
+    </div>
+
+    <div id="comments-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="comments-list"></div>
+            <form id="comment-form">
+                <textarea name="comment" placeholder="Add a comment" required></textarea>
+                <button type="submit">Add Comment</button>
+            </form>
         </div>
     </div>
 
