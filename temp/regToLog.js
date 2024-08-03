@@ -4,6 +4,8 @@ function showMessage(message, isError = false) {
         messageElement.textContent = message;
         messageElement.className = 'message ' + (isError ? 'error' : 'success');
         messageElement.style.display = 'block';
+    } else {
+        console.error('Message element not found');
     }
 }
 
@@ -13,6 +15,8 @@ function showLoginForm() {
     if (registerForm && loginForm) {
         registerForm.style.display = 'none';
         loginForm.style.display = 'block';
+    } else {
+        console.error('Register or login form not found');
     }
 }
 
@@ -22,12 +26,16 @@ function showRegisterForm() {
     if (registerForm && loginForm) {
         registerForm.style.display = 'block';
         loginForm.style.display = 'none';
+    } else {
+        console.error('Register or login form not found');
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registration-form');
     const loginFormElement = document.getElementById('login-form');
+    const goToLoginButton = document.getElementById('go-to-login');
+    const goToRegisterButton = document.getElementById('go-to-register');
 
     if (registrationForm) {
         registrationForm.addEventListener('submit', function(e) {
@@ -52,6 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMessage(error.message, true);
             });
         });
+    } else {
+        console.error('Registration form not found');
     }
 
     if (loginFormElement) {
@@ -71,11 +81,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMessage(message);
                 if (window.loginSuccess) {
                     window.loginSuccess();
+                } else {
+                    console.error('loginSuccess function not found');
                 }
             })
             .catch(error => {
                 showMessage(error.message, true);
             });
         });
+    } else {
+        console.error('Login form not found');
+    }
+
+    // Add event listeners for switching between forms
+    if (goToLoginButton) {
+        goToLoginButton.addEventListener('click', showLoginForm);
+    }
+    if (goToRegisterButton) {
+        goToRegisterButton.addEventListener('click', showRegisterForm);
     }
 });

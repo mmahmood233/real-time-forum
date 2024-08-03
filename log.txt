@@ -50,3 +50,20 @@
 2024/08/03 03:13:16 Rows affected: 1
 2024/08/03 03:13:16 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
 2024/08/03 03:13:16 Error getting session: invalid session
+2024/08/03 03:15:25 Starting server on :8800
+2024/08/03 03:15:38 Received registration request: nickname=zz, age=99, gender=male, firstname=zz, lastname=zz, email=zz@zz.zz
+2024/08/03 03:15:38 New user registered with ID: 4
+2024/08/03 03:15:38 User registered successfully: zz
+2024/08/03 03:15:48 New post created - ID: 2, Content: asd, Category: sports
+2024/08/03 03:15:52 New comment added - User: zz (ID: 4), Post ID: 2, Content: asd
+2024/08/03 03:15:55 Attempting to remove session from database: JDJhJDEwJEwzbmo5L3UyeWhrdklCYjNGS3R4di5HYjZLS3FmU3RWb2ptclY2L0plWXhrWHZmV2pCVUtp
+2024/08/03 03:15:55 Rows affected: 1
+2024/08/03 03:15:55 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 03:15:55 Error getting session: no session found
+2024/08/03 03:19:25 Starting server on :8800
+2024/08/03 03:21:10 Starting server on :8800
+2024/08/03 03:21:23 New comment added - User: xx (ID: 1), Post ID: 2, Content: ddd
+2024/08/03 03:21:26 Attempting to remove session from database: JDJhJDEwJHlCMGdDcWIwM2VwUVU3RGk4R1pDLy5YdzZsbzhqeHpKNHYxWUtUMmJzL1YuMExrWnZjMTVx
+2024/08/03 03:21:26 Rows affected: 1
+2024/08/03 03:21:26 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 03:21:26 Error getting session: invalid session
