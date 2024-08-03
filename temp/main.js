@@ -1,33 +1,47 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const authContainer = document.querySelector('.auth-container');
     const mainPage = document.querySelector('.main-page');
     const createPostPage = document.querySelector('.create-post-page');
     const postFeed = document.querySelector('.post-feed');
+    const chatArea = document.querySelector('.chat-area');
+    const registerForm = document.getElementById('register-form');
+    const loginFormElement = document.getElementById('login-form-element');
     const createPostButton = document.getElementById('create-post-button');
     const backToMainButton = document.getElementById('back-to-main');
     const logoutButton = document.getElementById('logout-button');
     const goToLoginButton = document.getElementById('go-to-login');
     const goToRegisterButton = document.getElementById('go-to-register');
 
-    function showMainPage() {
-        document.querySelector('.auth-container').style.display = 'none';
-        mainPage.style.display = 'block';
-        createPostPage.style.display = 'none';
-        loadPosts();
-    }
-
-    function showCreatePostPage() {
+    function hideAllSections() {
+        authContainer.style.display = 'none';
         mainPage.style.display = 'none';
-        createPostPage.style.display = 'block';
+        createPostPage.style.display = 'none';
+        registerForm.style.display = 'none';
+        loginFormElement.style.display = 'none';
     }
 
     function showRegisterForm() {
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('register-form').style.display = 'block';
+        hideAllSections();
+        authContainer.style.display = 'block';
+        registerForm.style.display = 'block';
     }
 
     function showLoginForm() {
-        document.getElementById('register-form').style.display = 'none';
-        document.getElementById('login-form').style.display = 'block';
+        hideAllSections();
+        authContainer.style.display = 'block';
+        loginFormElement.style.display = 'block';
+    }
+
+    function showMainPage() {
+        hideAllSections();
+        mainPage.style.display = 'block';
+        loadPosts();
+        loadChatArea();
+    }
+
+    function showCreatePostPage() {
+        hideAllSections();
+        createPostPage.style.display = 'block';
     }
 
     function loadPosts() {
@@ -43,6 +57,25 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Error loading posts:', error);
             });
+    }
+
+    function loadChatArea() {
+        fetch('/get-chat-area', {
+            method: 'GET',
+            credentials: 'include' // This ensures the session cookie is sent with the request
+        })
+        .then(response => response.text())
+        .then(html => {
+            const chatArea = document.querySelector('.chat-area');
+            if (chatArea) {
+                chatArea.innerHTML = html;
+            } else {
+                console.error('Chat area element not found');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading chat area:', error);
+        });
     }
 
     function handleCommentSubmit(e) {
@@ -170,7 +203,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(message);
             this.reset();
             showMainPage();
-            loadPosts();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -200,6 +232,11 @@ document.addEventListener('DOMContentLoaded', function () {
     backToMainButton.addEventListener('click', showMainPage);
     goToLoginButton.addEventListener('click', showLoginForm);
     goToRegisterButton.addEventListener('click', showRegisterForm);
+
+    setInterval(loadChatArea, 10); // Refresh chat area every 30 seconds
+
+    // Initial page load
+    showLoginForm();
 
     window.loginSuccess = showMainPage;
 });

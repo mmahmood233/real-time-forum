@@ -28,6 +28,7 @@
         }
         .post-feed {
             margin-bottom: 20px;
+            flex: 2;
         }
         .post {
             background-color: #f9f9f9;
@@ -160,6 +161,24 @@
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+.main-page {
+    display: flex;
+    justify-content: space-between;
+}
+.chat-area {
+    flex: 1;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+.online {
+    color: green;
+}
+.offline {
+    color: red;
+}
+
 
     </style>
 </head>
@@ -207,6 +226,7 @@
                 <h2>Recent Posts</h2>
                 <!-- Posts will be dynamically added here -->
             </div>
+            <div class="chat-area"></div>
         </div>
 
         <div class="create-post-page">

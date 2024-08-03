@@ -91,6 +91,21 @@ func main() {
 		forum.HandleDislikeComment(w, r, database)
 	})
 
+    http.HandleFunc("/get-chat-area", func(w http.ResponseWriter, r *http.Request) {
+        session, err := forum.GetSession(r, database)
+        if err != nil || session == nil {
+            http.Error(w, "Unauthorized", http.StatusUnauthorized)
+            return
+        }
+        chatHTML, err := forum.GetChatAreaHTML(database, r)
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+        w.Header().Set("Content-Type", "text/html")
+        w.Write([]byte(chatHTML))
+    })
+
     // Start the web server
     log.Println("Starting server on :8800")
     fmt.Println("Starting server on :8800")
