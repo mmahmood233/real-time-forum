@@ -77,50 +77,6 @@ func InsertPost(post *Post, db *sql.DB) (int64, error) {
     return result.LastInsertId()
 }
 
-func InsertPostCategory(postCategory *PostCategory, db *sql.DB) error {
-    stmt, err := db.Prepare("INSERT INTO post_categories (post_id, category_id) VALUES (?, ?)")
-    if err != nil {
-        return err
-    }
-    defer stmt.Close()
-
-    _, err = stmt.Exec(postCategory.PostID, postCategory.CategoryID)
-    return err
-}
-
-func getCategoryID(categoryName string, db *sql.DB) int {
-    var categoryID int
-    err := db.QueryRow("SELECT cat_id FROM categories WHERE cat_name = ?", categoryName).Scan(&categoryID)
-    if err != nil {
-        if err == sql.ErrNoRows {
-            // Category doesn't exist, create it
-            stmt, err := db.Prepare("INSERT INTO categories (cat_name) VALUES (?)")
-            if err != nil {
-                log.Printf("Error preparing category insert statement: %v", err)
-                return 0
-            }
-            defer stmt.Close()
-
-            result, err := stmt.Exec(categoryName)
-            if err != nil {
-                log.Printf("Error inserting new category: %v", err)
-                return 0
-            }
-
-            lastInsertID, err := result.LastInsertId()
-            if err != nil {
-                log.Printf("Error getting last insert ID for category: %v", err)
-                return 0
-            }
-
-            return int(lastInsertID)
-        }
-        log.Printf("Error querying category: %v", err)
-        return 0
-    }
-    return categoryID
-}
-
 func GetPosts(db *sql.DB) (string, error) {
     query := `
         SELECT p.post_id, p.user_id, p.post_content, p.post_created_at, u.nickname,
@@ -167,9 +123,10 @@ func GetPosts(db *sql.DB) (string, error) {
 
         postsHTML.WriteString(fmt.Sprintf(`
         <div class="post" data-id="%d">
-            <h3>%s</h3>
-            <p>%s</p>
+            <h3>Created By: %s</h3>
+            <p>Post Content: %s</p>
             <small>Category: %s</small>
+            <br>
             <small>Created at: %s</small>
             <button class="like-post" data-post-id="%d">Like (%d)</button>
             <button class="dislike-post" data-post-id="%d">Dislike (%d)</button>
@@ -179,12 +136,13 @@ func GetPosts(db *sql.DB) (string, error) {
     for _, comment := range comments {
         postsHTML.WriteString(fmt.Sprintf(`
             <div class="comment" data-id="%d">
-                <p>%s</p>
-                <small>By %s on %s</small>
+                <h4>Commented By %s</h4>
+                <p>Comment Content: %s</p>
+                <small> Created at: %s</small>
                 <button class="like-comment" data-comment-id="%d">Like (%d)</button>
                 <button class="dislike-comment" data-comment-id="%d">Dislike (%d)</button>
             </div>
-        `, comment.CommentID, comment.CommentContent, comment.UserNickname, comment.CreatedAt.Format("2006-01-02 15:04:05"), comment.CommentID, comment.LikeCount, comment.CommentID, comment.DislikeCount))
+        `, comment.CommentID, comment.UserNickname, comment.CommentContent, comment.CreatedAt.Format("2006-01-02 15:04:05"), comment.CommentID, comment.LikeCount, comment.CommentID, comment.DislikeCount))
     }
     
 

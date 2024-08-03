@@ -187,3 +187,48 @@
 2024/08/03 04:53:22 Rows affected: 1
 2024/08/03 04:53:22 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
 2024/08/03 04:53:22 Error getting session: invalid session
+2024/08/03 18:32:47 Starting server on :8800
+2024/08/03 18:34:53 Attempting to remove session from database: JDJhJDEwJE01c0VRMjhrTktkL3NyY2x3elZhNGU3ZUsuVDFaYmo3V3JyUWlhRXZnT0VpLnJ3VFdGSjMu
+2024/08/03 18:34:53 Rows affected: 1
+2024/08/03 18:34:53 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 18:34:54 Error getting session: invalid session
+2024/08/03 18:34:58 Attempting to remove session from database: JDJhJDEwJDVuVXNRWUZqcE1qSmM0aHp0ZHM3bGVEamwzdmZCWm5rSFo5elc4YXY3TmthWFVxMWxFOVVP
+2024/08/03 18:34:58 Rows affected: 1
+2024/08/03 18:34:58 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 18:34:58 Error getting session: invalid session
+2024/08/03 18:35:07 New comment added - User: xx (ID: 1), Post ID: 1, Content: aaaaa
+2024/08/03 18:35:10 User xx (ID: 1) liked comment 1
+2024/08/03 18:35:12 Attempting to remove session from database: JDJhJDEwJE9TV1pGQVFGaUZXRlh2eUVYV2NWVnVVM29INFlWRkpZSHdMUjN1Rml1b0lkbTN5TDA0WUxl
+2024/08/03 18:35:12 Rows affected: 1
+2024/08/03 18:35:12 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 18:35:12 Error getting session: invalid session
+2024/08/03 18:35:19 User zz (ID: 2) liked comment 1
+2024/08/03 18:36:48 Attempting to remove session from database: JDJhJDEwJFNMNFZhL0cvb0Q2bE1vZFY0VjJZZHU2ZS9MR3NnUW85SUhJODN2WkJqMWV4T29sZllPVHpP
+2024/08/03 18:36:48 Rows affected: 1
+2024/08/03 18:36:48 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 18:36:48 Error getting session: invalid session
+2024/08/03 18:36:59 Received registration request: nickname=qq, age=22, gender=male, firstname=qq, lastname=qq, email=qq@qq.qq
+2024/08/03 18:36:59 New user registered with ID: 3
+2024/08/03 18:36:59 User registered successfully: qq
+2024/08/03 18:47:45 Starting server on :8800
+2024/08/03 18:47:58 New post created - ID: 2, Content: aaa, Category: tech
+2024/08/03 18:48:09 New post created - ID: 3, Content: ccc, Category: sports
+2024/08/03 18:48:17 Attempting to remove session from database: JDJhJDEwJFovVXJSTlA0UXpBSmY5c1h5L3VRVGV4SHFkeHh6ZG80bjZid2Uwc0hVYVZBb0d2MWxrZExD
+2024/08/03 18:48:17 Rows affected: 1
+2024/08/03 18:48:17 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 18:48:17 Error getting session: invalid session
+2024/08/03 18:48:36 Attempting to remove session from database: JDJhJDEwJGxILlRvdWtudUhTcTJlaVBLd25HaS5USXY4eDlLUy9ydnUzN0FkUFJEbWxncThuTDBibTJx
+2024/08/03 18:48:36 Rows affected: 1
+2024/08/03 18:48:36 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 18:48:36 Error getting session: invalid session
+2024/08/03 19:02:40 Starting server on :8800
+2024/08/03 19:03:16 Starting server on :8800
+2024/08/03 19:09:40 Starting server on :8800
+2024/08/03 19:10:05 Starting server on :8800
+2024/08/03 19:10:26 Starting server on :8800
+2024/08/03 19:10:42 New comment added - User: xx (ID: 1), Post ID: 3, Content: xxx
+2024/08/03 19:11:14 Starting server on :8800
+2024/08/03 19:13:00 Starting server on :8800
+2024/08/03 19:13:26 New post created - ID: 4, Content: xxxxxx, Category: tech
+2024/08/03 19:13:35 New comment added - User: xx (ID: 1), Post ID: 4, Content: This is the comm
+2024/08/03 19:14:20 Starting server on :8800

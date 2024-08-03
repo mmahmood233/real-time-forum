@@ -38,6 +38,7 @@ func main() {
 
     // Set up route handlers
     http.HandleFunc("/", ServeMainPage)
+    http.Handle("/main.css", http.FileServer(http.Dir("temp")))
     http.HandleFunc("/regToLog.js", ServeJavaScript)
     http.HandleFunc("/main.js", ServeJavaScript)
     http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
