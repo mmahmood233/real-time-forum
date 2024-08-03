@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.auth-container').style.display = 'none';
         mainPage.style.display = 'block';
         createPostPage.style.display = 'none';
-        loadPosts(); // Ensure posts and comments are loaded when showing the main page
+        loadPosts();
     }
 
     function showCreatePostPage() {
@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function loadPosts() {
         fetch('/get-posts')
-            .then(response => response.json())
-            .then(posts => {
-                postFeed.innerHTML = ''; // Clear existing posts
-                posts.forEach(post => {
-                    addPostToFeed(post); // Add posts to feed
-                    loadCommentsForPost(post.id); // Load comments for each post
+            .then(response => response.text())
+            .then(html => {
+                postFeed.innerHTML = html;
+                // Add event listeners to new comment forms
+                document.querySelectorAll('.comment-form').forEach(form => {
+                    form.addEventListener('submit', handleCommentSubmit);
                 });
             })
             .catch(error => {
@@ -45,125 +45,98 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    function loadCommentsForPost(postId) {
-        fetch(`/get-comments?postId=${postId}`)
-            .then(response => response.json())
-            .then(comments => {
-                const post = document.querySelector(`.post[data-id="${postId}"]`);
-                if (post) {
-                    const commentsContainer = post.querySelector('.comments');
-                    commentsContainer.innerHTML = ''; // Clear existing comments
-                    comments.forEach(comment => {
-                        const commentElement = document.createElement('div');
-                        commentElement.className = 'comment';
-                        commentElement.textContent = comment.CommentContent;
-                        commentsContainer.appendChild(commentElement);
-                    });
-                } else {
-                    console.error('Post not found:', postId);
-                }
-            })
-            .catch(error => {
-                console.error('Error loading comments:', error);
-            });
-    }
-
-    function addPostToFeed(post) {
-        const postElement = document.createElement('div');
-        postElement.className = 'post';
-        postElement.dataset.id = post.id; // Add data-id attribute for identification
-        postElement.innerHTML = `
-            <h3>${post.author}</h3>
-            <p>${post.content}</p>
-            <small>Category: ${post.category}</small>
-            <div class="comments"></div>
-            <form class="comment-form">
-                <input type="text" name="comment" placeholder="Add a comment" required>
-                <button type="submit">Comment</button>
-            </form>
-        `;
-        postElement.querySelector('.comment-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const commentContent = this.comment.value;
-            addCommentToPost(post.id, commentContent);
-            this.reset();
-        });
-        postFeed.appendChild(postElement);
+    function handleCommentSubmit(e) {
+        e.preventDefault();
+        const postElement = e.target.closest('.post');
+        if (!postElement) {
+            console.error('Could not find parent post element');
+            return;
+        }
+        const postId = postElement.dataset.id;
+        if (!postId) {
+            console.error('Could not find post ID');
+            return;
+        }
+        const commentContent = e.target.comment.value;
+        addCommentToPost(postId, commentContent);
+        e.target.reset();
     }
 
     function addCommentToPost(postId, content) {
-        fetch('/add-comment', {
+        const formData = new FormData();
+        formData.append('commentCont', content);
+    
+        fetch(`/add-comment?postID=${postId}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ postID: postId, commentCont: content }),
+            body: formData,
         })
-            .then(response => response.text()) // Read response as text
-            .then(text => {
-                // Log raw response text
-                console.log('Server response:', text);
-                
-                // Create comment element and append it to the post's comments section
-                const post = document.querySelector(`.post[data-id="${postId}"]`);
-                if (post) {
-                    const commentElement = document.createElement('div');
-                    commentElement.className = 'comment';
-                    commentElement.textContent = content; // Use the content sent in the request
-                    post.querySelector('.comments').appendChild(commentElement);
-                } else {
-                    console.error('Post not found:', postId);
-                }
-            })
-            .catch(error => {
-                console.error('Error adding comment:', error);
-            });
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error(`Failed to add comment: ${text}`);
+                });
+            }
+            return response.text();
+        })
+        .then(text => {
+            console.log('Server response:', text);
+            loadPosts(); // Reload all posts to show the new comment
+        })
+        .catch(error => {
+            console.error('Error adding comment:', error);
+            alert(`Failed to add comment: ${error.message}`);
+        });
     }
 
     document.getElementById('post-form').addEventListener('submit', function (e) {
         e.preventDefault();
         const content = this.content.value;
         const category = this.category.value;
-
+    
         const formData = new FormData();
         formData.append('postCont', content);
         formData.append('catCont', category);
-
+    
         fetch('/create-post', {
             method: 'POST',
             body: formData,
         })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-                return response.text();
-            })
-            .then(message => {
-                console.log(message); // Log success message
-                this.reset();
-                showMainPage(); // Go back to main page after creating post
-                loadPosts(); // Reload all posts to show the new post
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to create post: ' + error.message);
-            });
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.text();
+        })
+        .then(message => {
+            console.log(message); // Log success message
+            this.reset();
+            showMainPage(); // Go back to main page after creating post
+            loadPosts(); // Reload all posts to show the new post
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to create post: ' + error.message);
+        });
     });
 
     logoutButton.addEventListener('click', function () {
-        fetch('/logout', { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload();
-                } else {
-                    throw new Error('Logout failed');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Logout failed. Please try again.');
-            });
+        fetch('/logout', { 
+            method: 'POST',
+            redirect: 'follow' // This tells fetch to follow redirects
+        })
+        .then(response => {
+            if (response.ok) {
+                // The server successfully logged out the user and redirected
+                // Now we need to redirect the browser
+                window.location.href = response.url;
+            } else {
+                throw new Error('Logout failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Logout failed. Please try again.');
+        });
     });
 
     createPostButton.addEventListener('click', showCreatePostPage);

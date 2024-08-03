@@ -44,7 +44,13 @@ func main() {
         forum.HandleReg(w, r, database)
     })
     http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-        forum.HandleLogin(w, r, database)
+        if r.Method == http.MethodGet {
+            // Serve the login page
+            http.ServeFile(w, r, "temp/main.html")
+        } else if r.Method == http.MethodPost {
+            // Handle login POST request
+            forum.HandleLogin(w, r, database)
+        }
     })
     http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
         forum.Logout(w, r, database)
@@ -53,10 +59,21 @@ func main() {
         forum.CreatePost(w, r, database)
     })
     http.HandleFunc("/get-posts", func(w http.ResponseWriter, r *http.Request) {
-        forum.GetPosts(w, r, database)
+        postsHTML, err := forum.GetPosts(database)
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+        w.Header().Set("Content-Type", "text/html")
+        w.Write([]byte(postsHTML))
     })
     http.HandleFunc("/add-comment", func(w http.ResponseWriter, r *http.Request) {
-        forum.CreateComment(w, r, database)
+        err := forum.CreateComment(w, r, database)
+        if err != nil {
+            log.Printf("Error creating comment: %v", err)
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
     })
     
 

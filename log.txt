@@ -1,13 +1,52 @@
-2024/08/01 01:16:05 Starting server on :8800
-2024/08/01 01:16:34 Received registration request: nickname=xx, age=88, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
-2024/08/01 01:16:34 New user registered with ID: 1
-2024/08/01 01:16:34 User registered successfully: xx
-2024/08/01 01:16:49 New post created - ID: 1, Content: jhv, Category: general
-2024/08/01 01:19:21 Received registration request: nickname=mm, age=11, gender=male, firstname=mm, lastname=mm, email=mm@mm.mm
-2024/08/01 01:19:22 New user registered with ID: 2
-2024/08/01 01:19:22 User registered successfully: mm
-2024/08/01 01:28:29 Starting server on :8800
-2024/08/01 01:28:57 Received registration request: nickname=gg, age=44, gender=male, firstname=gg, lastname=gg, email=gg@gg.gg
-2024/08/01 01:28:58 New user registered with ID: 3
-2024/08/01 01:28:58 User registered successfully: gg
-2024/08/01 01:33:03 Starting server on :8800
+2024/08/03 02:45:10 Starting server on :8800
+2024/08/03 02:45:30 Received registration request: nickname=ss, age=22, gender=male, firstname=ss, lastname=ss, email=ss@ss.ss
+2024/08/03 02:45:30 New user registered with ID: 4
+2024/08/03 02:45:30 User registered successfully: ss
+2024/08/03 02:45:39 New post created - ID: 2, Content: asdasdasd, Category: general
+2024/08/03 02:52:00 Starting server on :8800
+2024/08/03 02:52:19 Received registration request: nickname=xx, age=222, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/08/03 02:52:19 New user registered with ID: 1
+2024/08/03 02:52:19 User registered successfully: xx
+2024/08/03 02:52:28 New post created - ID: 1, Content: asd, Category: general
+2024/08/03 02:52:55 Starting server on :8800
+2024/08/03 02:53:10 Received registration request: nickname=aa, age=21, gender=male, firstname=aa, lastname=aa, email=aa@aa.aa
+2024/08/03 02:53:10 New user registered with ID: 2
+2024/08/03 02:53:10 User registered successfully: aa
+2024/08/03 02:53:23 New post created - ID: 2, Content: sdasdasdasdasdasd, Category: general
+2024/08/03 02:59:20 Starting server on :8800
+2024/08/03 02:59:32 Received registration request: nickname=dd, age=44, gender=male, firstname=dd, lastname=dd, email=dd@dd.dd
+2024/08/03 02:59:32 New user registered with ID: 1
+2024/08/03 02:59:32 User registered successfully: dd
+2024/08/03 02:59:40 New post created - ID: 1, Content: asdasd, Category: tech
+2024/08/03 03:00:22 Received registration request: nickname=gg, age=77, gender=male, firstname=gg, lastname=gg, email=gg@gg.gg
+2024/08/03 03:00:22 New user registered with ID: 2
+2024/08/03 03:00:22 User registered successfully: gg
+2024/08/03 03:00:37 New post created - ID: 2, Content: asdasfasfasf, Category: tech
+2024/08/03 03:03:57 Starting server on :8800
+2024/08/03 03:04:11 Received registration request: nickname=xx, age=22, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/08/03 03:04:11 New user registered with ID: 1
+2024/08/03 03:04:11 User registered successfully: xx
+2024/08/03 03:04:20 New post created - ID: 1, Content: sdadasdasd, Category: general
+2024/08/03 03:07:07 Starting server on :8800
+2024/08/03 03:07:22 Received registration request: nickname=xx, age=66, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/08/03 03:07:22 New user registered with ID: 1
+2024/08/03 03:07:22 User registered successfully: xx
+2024/08/03 03:07:34 New post created - ID: 1, Content: post 1, Category: general
+2024/08/03 03:07:37 New comment added - User: xx (ID: 1), Post ID: 1, Content: aaa
+2024/08/03 03:07:44 New comment added - User: xx (ID: 1), Post ID: 1, Content: zzz
+2024/08/03 03:07:51 Attempting to remove session from database: JDJhJDEwJDJaMHNhZkd3dGQyUVY5YlpmVzBwNmUwakF5ZUxtVktWSEZ4RlFWQ0suWUd3cVBtemxMOUFL
+2024/08/03 03:07:51 Rows affected: 1
+2024/08/03 03:08:09 Received registration request: nickname=cc, age=22, gender=male, firstname=cc, lastname=cc, email=cc@cc.cc
+2024/08/03 03:08:09 New user registered with ID: 2
+2024/08/03 03:08:09 User registered successfully: cc
+2024/08/03 03:08:17 New comment added - User: cc (ID: 2), Post ID: 1, Content: ffff
+2024/08/03 03:09:08 Attempting to remove session from database: JDJhJDEwJDNUSUpLMU12QUxEcWlpckdPLzVWYS5rRk9Eci5KcVY5d3loRWpqNjVuelVRckx4dXRvTFRt
+2024/08/03 03:09:08 Rows affected: 1
+2024/08/03 03:12:57 Starting server on :8800
+2024/08/03 03:13:11 Received registration request: nickname=qq, age=88, gender=male, firstname=qq, lastname=qq, email=qq@qq.qq
+2024/08/03 03:13:11 New user registered with ID: 3
+2024/08/03 03:13:11 User registered successfully: qq
+2024/08/03 03:13:16 Attempting to remove session from database: JDJhJDEwJG1jNFFXdGxlWC9iSWNESVZPblFjMy51enNsR0hiRVhWNnpiT0hIUlYuRWNuSzdpcTduaTgy
+2024/08/03 03:13:16 Rows affected: 1
+2024/08/03 03:13:16 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 03:13:16 Error getting session: invalid session

@@ -7,69 +7,54 @@ import (
     "time"
     "log"
     "database/sql"
+    "fmt"
 )
 
-// CreateComment handles the creation of a new comment
-func CreateComment(w http.ResponseWriter, r *http.Request, db *sql.DB) {
-    if r.Method == http.MethodPost {
-        session, err := GetSession(r, db)
-        if err != nil {
-            http.Error(w, err.Error(), http.StatusInternalServerError)
-            return
-        }
-
-        userID := session.UserID
-
-        // Get the comment content and validate it
-        comContent := strings.TrimSpace(r.FormValue("commentCont"))
-        if comContent == "" {
-            errorData := &Error{
-                Err:     400,
-                ErrStr: "Comment content cannot be empty",
-            }
-            HandleError(w, errorData)
-            return
-        }
-
-        // Get the post ID from URL query
-        postID := r.URL.Query().Get("postID")
-
-        // Convert postID from string to int
-        postIDInt, err := strconv.Atoi(postID)
-        if err != nil {
-            http.Error(w, "Invalid post ID", http.StatusBadRequest)
-            return
-        }
-
-        // Create the comment object
-        comment := &Comment{
-            UserID:         userID,
-            PostID:         postIDInt,
-            CommentContent: comContent,
-            CreatedAt:      time.Now(),
-        }
-
-        // Insert the comment into the database
-        err = InsertComment(comment, db)
-        if err != nil {
-            http.Error(w, err.Error(), http.StatusInternalServerError)
-            return
-        }
-
-        // Log the comment information
-        user, err := GetUserByID(db, userID)
-        if err != nil {
-            log.Printf("Error getting user info: %v", err)
-        } else {
-            log.Printf("New comment added - User: %s (ID: %d), Post ID: %d, Content: %s", user.NickName, userID, postIDInt, comContent)
-        }
-
-        // Redirect to the main page
-        http.Redirect(w, r, "/main", http.StatusSeeOther)
-        return
+func CreateComment(w http.ResponseWriter, r *http.Request, db *sql.DB) error {
+    if r.Method != http.MethodPost {
+        return fmt.Errorf("Invalid request method")
     }
 
-    http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+    session, err := GetSession(r, db)
+    if err != nil {
+        return err
+    }
+
+    userID := session.UserID
+
+    comContent := strings.TrimSpace(r.FormValue("commentCont"))
+    if comContent == "" {
+        return fmt.Errorf("Comment content cannot be empty")
+    }
+
+    postID := r.URL.Query().Get("postID")
+    postIDInt, err := strconv.Atoi(postID)
+    if err != nil {
+        return fmt.Errorf("Invalid post ID: %v", err)
+    }
+
+    comment := &Comment{
+        UserID:         userID,
+        PostID:         postIDInt,
+        CommentContent: comContent,
+        CreatedAt:      time.Now(),
+    }
+
+    err = InsertComment(comment, db)
+    if err != nil {
+        return err
+    }
+
+    user, err := GetUserByID(db, userID)
+    if err != nil {
+        log.Printf("Error getting user info: %v", err)
+    } else {
+        log.Printf("New comment added - User: %s (ID: %d), Post ID: %d, Content: %s", user.NickName, userID, postIDInt, comContent)
+    }
+
+    w.WriteHeader(http.StatusCreated)
+    w.Write([]byte("Comment added successfully"))
+    return nil
 }
 
 // InsertComment inserts a new comment into the database
@@ -87,10 +72,12 @@ func InsertComment(comment *Comment, db *sql.DB) error {
     return nil
 }
 
-// GetCommentsByPostID retrieves comments for a specific post ID
-func GetCommentsByPostID(postID int, db *sql.DB) ([]Comment, error) {
+func GetCommentsByPostID(postID int, db *sql.DB) ([]struct {
+    Comment
+    UserNickname string
+}, error) {
     query := `
-        SELECT c.comment_id, c.comment_content, c.comment_created_at, u.username,
+        SELECT c.comment_id, c.user_id, c.comment_content, c.comment_created_at, u.nickname,
                (SELECT COUNT(*) FROM comment_likes WHERE comment_id = c.comment_id) as like_count,
                (SELECT COUNT(*) FROM comment_dislikes WHERE comment_id = c.comment_id) as dislike_count
         FROM comments c
@@ -103,12 +90,16 @@ func GetCommentsByPostID(postID int, db *sql.DB) ([]Comment, error) {
     }
     defer rows.Close()
 
-    var comments []Comment
+    var comments []struct {
+        Comment
+        UserNickname string
+    }
+
     for rows.Next() {
         var c Comment
-
+        var userNickname string
         var createdAtStr string
-        if err := rows.Scan(&c.CommentID, &c.CommentContent, &createdAtStr, &c.Username, &c.LikeCount, &c.DislikeCount); err != nil {
+        if err := rows.Scan(&c.CommentID, &c.UserID, &c.CommentContent, &createdAtStr, &userNickname, &c.LikeCount, &c.DislikeCount); err != nil {
             return nil, err
         }
         createdAt, err := time.Parse(time.RFC3339, createdAtStr)
@@ -117,7 +108,10 @@ func GetCommentsByPostID(postID int, db *sql.DB) ([]Comment, error) {
         }
         c.CreatedAt = createdAt
 
-        comments = append(comments, c)
+        comments = append(comments, struct {
+            Comment
+            UserNickname string
+        }{c, userNickname})
     }
 
     if err := rows.Err(); err != nil {

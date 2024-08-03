@@ -50,28 +50,33 @@ func HandleLogin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 }
 
 func Logout(w http.ResponseWriter, r *http.Request, db *sql.DB) {
-	session, err := GetSession(r, db)
-	if err != nil {
-		log.Printf("Error getting session: %v", err)
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
-		return
-	}
+    session, err := GetSession(r, db)
+    if err != nil {
+        log.Printf("Error getting session: %v", err)
+        http.Redirect(w, r, "/login", http.StatusSeeOther)
+        return
+    }
 
-	err = RemoveSession(db, session.SessionID)
-	if err != nil {
-		log.Printf("Error removing session: %v", err)
-	}
+    err = RemoveSession(db, session.SessionID)
+    if err != nil {
+        log.Printf("Error removing session: %v", err)
+    }
 
-	// Clear the session cookie
-	http.SetCookie(w, &http.Cookie{
-		Name:     "session_id",
-		Value:    "",
-		Path:     "/",
-		HttpOnly: true,
-		MaxAge:   -1,
-	})
+    // Clear the session cookie
+    http.SetCookie(w, &http.Cookie{
+        Name:     "session_id",
+        Value:    "",
+        Path:     "/",
+        HttpOnly: true,
+        MaxAge:   -1,
+    })
 
-	http.Redirect(w, r, "/login", http.StatusSeeOther)
+    // Send a success response before redirecting
+    w.WriteHeader(http.StatusOK)
+    w.Write([]byte("Logout successful"))
+
+    // Then redirect
+    http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
 
 func IsLoggedIn(r *http.Request, db *sql.DB) bool {
