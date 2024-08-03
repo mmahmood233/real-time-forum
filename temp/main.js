@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.text())
             .then(html => {
                 postFeed.innerHTML = html;
-                // Add event listeners to new comment forms
                 document.querySelectorAll('.comment-form').forEach(form => {
                     form.addEventListener('submit', handleCommentSubmit);
                 });
+                addLikeDislikeListeners();
             })
             .catch(error => {
                 console.error('Error loading posts:', error);
@@ -80,12 +80,71 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(text => {
             console.log('Server response:', text);
-            loadPosts(); // Reload all posts to show the new comment
+            loadPosts();
         })
         .catch(error => {
             console.error('Error adding comment:', error);
             alert(`Failed to add comment: ${error.message}`);
         });
+    }
+
+    function addLikeDislikeListeners() {
+        document.querySelectorAll('.like-post').forEach(button => {
+            button.addEventListener('click', handleLikePost);
+        });
+        document.querySelectorAll('.dislike-post').forEach(button => {
+            button.addEventListener('click', handleDislikePost);
+        });
+        document.querySelectorAll('.like-comment').forEach(button => {
+            button.addEventListener('click', handleLikeComment);
+        });
+        document.querySelectorAll('.dislike-comment').forEach(button => {
+            button.addEventListener('click', handleDislikeComment);
+        });
+    }
+
+    function handleLikePost(e) {
+        const postId = e.target.dataset.postId;
+        fetch(`/like-post?postID=${postId}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Post liked:', data);
+                loadPosts();
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function handleDislikePost(e) {
+        const postId = e.target.dataset.postId;
+        fetch(`/dislike-post?postID=${postId}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Post disliked:', data);
+                loadPosts();
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function handleLikeComment(e) {
+        const commentId = e.target.dataset.commentId;
+        fetch(`/like-comment?commentID=${commentId}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Comment liked:', data);
+                loadPosts();
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function handleDislikeComment(e) {
+        const commentId = e.target.dataset.commentId;
+        fetch(`/dislike-comment?commentID=${commentId}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Comment disliked:', data);
+                loadPosts();
+            })
+            .catch(error => console.error('Error:', error));
     }
 
     document.getElementById('post-form').addEventListener('submit', function (e) {
@@ -108,10 +167,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.text();
         })
         .then(message => {
-            console.log(message); // Log success message
+            console.log(message);
             this.reset();
-            showMainPage(); // Go back to main page after creating post
-            loadPosts(); // Reload all posts to show the new post
+            showMainPage();
+            loadPosts();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -122,12 +181,10 @@ document.addEventListener('DOMContentLoaded', function () {
     logoutButton.addEventListener('click', function () {
         fetch('/logout', { 
             method: 'POST',
-            redirect: 'follow' // This tells fetch to follow redirects
+            redirect: 'follow'
         })
         .then(response => {
             if (response.ok) {
-                // The server successfully logged out the user and redirected
-                // Now we need to redirect the browser
                 window.location.href = response.url;
             } else {
                 throw new Error('Logout failed');
@@ -144,6 +201,5 @@ document.addEventListener('DOMContentLoaded', function () {
     goToLoginButton.addEventListener('click', showLoginForm);
     goToRegisterButton.addEventListener('click', showRegisterForm);
 
-    // Expose loginSuccess function to be called from regToLog.js
     window.loginSuccess = showMainPage;
 });

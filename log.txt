@@ -67,3 +67,25 @@
 2024/08/03 03:21:26 Rows affected: 1
 2024/08/03 03:21:26 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
 2024/08/03 03:21:26 Error getting session: invalid session
+2024/08/03 03:30:57 Starting server on :8800
+2024/08/03 03:32:40 New post created - ID: 3, Content: ccccc, Category: general
+2024/08/03 03:32:56 New post created - ID: 4, Content: ddd, Category: tech
+2024/08/03 03:33:00 New comment added - User: xx (ID: 1), Post ID: 4, Content: ddd
+2024/08/03 03:37:23 Starting server on :8800
+2024/08/03 03:37:33 User xx (ID: 1) liked post 4
+2024/08/03 03:37:44 User xx (ID: 1) liked post 4
+2024/08/03 03:37:48 User xx (ID: 1) disliked post 4
+2024/08/03 03:37:51 User xx (ID: 1) disliked post 4
+2024/08/03 03:37:55 User xx (ID: 1) disliked post 4
+2024/08/03 03:37:56 User xx (ID: 1) disliked post 4
+2024/08/03 03:38:12 User xx (ID: 1) liked post 4
+2024/08/03 03:38:14 User xx (ID: 1) liked post 4
+2024/08/03 03:38:15 User xx (ID: 1) liked post 4
+2024/08/03 03:38:16 User xx (ID: 1) disliked post 4
+2024/08/03 03:38:25 User xx (ID: 1) disliked post 4
+2024/08/03 03:38:27 User xx (ID: 1) disliked post 4
+2024/08/03 03:38:28 User xx (ID: 1) disliked post 4
+2024/08/03 03:39:07 Attempting to remove session from database: JDJhJDEwJE9LLjYvNWpmeEU1ci5ySTRBdUxxS3Vrd3pSM0N0YWJtNUlzZjlwQjlkZVViZmoySzZMd25h
+2024/08/03 03:39:07 Rows affected: 1
+2024/08/03 03:39:07 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 03:39:07 Error getting session: invalid session

@@ -166,22 +166,27 @@ func GetPosts(db *sql.DB) (string, error) {
         }
 
         postsHTML.WriteString(fmt.Sprintf(`
-            <div class="post" data-id="%d">
-                <h3>%s</h3>
+        <div class="post" data-id="%d">
+            <h3>%s</h3>
+            <p>%s</p>
+            <small>Category: %s</small>
+            <small>Created at: %s</small>
+            <button class="like-post" data-post-id="%d">Like (%d)</button>
+            <button class="dislike-post" data-post-id="%d">Dislike (%d)</button>
+            <div class="comments">
+    `, p.PostID, u.NickName, p.PostContent, categories[0].CatName, p.CreatedAt.Format("2006-01-02 15:04:05"), p.PostID, p.LikeCount, p.PostID, p.DislikeCount))
+    
+    for _, comment := range comments {
+        postsHTML.WriteString(fmt.Sprintf(`
+            <div class="comment" data-id="%d">
                 <p>%s</p>
-                <small>Category: %s</small>
-                <small>Created at: %s</small>
-                <div class="comments">
-        `, p.PostID, u.NickName, p.PostContent, categories[0].CatName, p.CreatedAt.Format("2006-01-02 15:04:05")))
-
-        for _, comment := range comments {
-            postsHTML.WriteString(fmt.Sprintf(`
-                <div class="comment">
-                    <p>%s</p>
-                    <small>By %s on %s</small>
-                </div>
-            `, comment.CommentContent, comment.UserNickname, comment.CreatedAt.Format("2006-01-02 15:04:05")))
-        }
+                <small>By %s on %s</small>
+                <button class="like-comment" data-comment-id="%d">Like (%d)</button>
+                <button class="dislike-comment" data-comment-id="%d">Dislike (%d)</button>
+            </div>
+        `, comment.CommentID, comment.CommentContent, comment.UserNickname, comment.CreatedAt.Format("2006-01-02 15:04:05"), comment.CommentID, comment.LikeCount, comment.CommentID, comment.DislikeCount))
+    }
+    
 
         postsHTML.WriteString(`
                 </div>

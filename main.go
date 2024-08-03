@@ -75,7 +75,21 @@ func main() {
             return
         }
     })
-    
+    http.HandleFunc("/feedback", func(w http.ResponseWriter, r *http.Request) {
+		forum.FeedbackHandler(w, r, database)
+	})
+	http.HandleFunc("/like-post", func(w http.ResponseWriter, r *http.Request) {
+		forum.HandleLikePost(w, r, database)
+	})
+	http.HandleFunc("/dislike-post", func(w http.ResponseWriter, r *http.Request) {
+		forum.HandleDislikePost(w, r, database)
+	})
+	http.HandleFunc("/like-comment", func(w http.ResponseWriter, r *http.Request) {
+		forum.HandleLikeComment(w, r, database)
+	})
+	http.HandleFunc("/dislike-comment", func(w http.ResponseWriter, r *http.Request) {
+		forum.HandleDislikeComment(w, r, database)
+	})
 
     // Start the web server
     log.Println("Starting server on :8800")

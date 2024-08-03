@@ -29,10 +29,6 @@ CREATE TABLE IF NOT EXISTS comments (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-INSERT INTO comments (post_id, user_id, comment_content)
-VALUES (1, 1, 'This is a test comment.');
-
-
 -- schema.sql
 CREATE TABLE IF NOT EXISTS post_likes (
     post_like_id INTEGER PRIMARY KEY AUTOINCREMENT,
