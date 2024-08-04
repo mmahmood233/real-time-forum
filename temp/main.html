@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
+    <title>Real Time Forum</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <div class="container">
+        <!-- Authentication Container -->
         <div class="auth-container">
             <div id="message" class="message" style="display: none;"></div>
-            
+           
+            <!-- Registration Form -->
             <div id="register-form">
                 <h2>Register</h2>
                 <form id="registration-form" method="post">
@@ -31,6 +33,7 @@
                 <p>Already have an account? <button id="go-to-login">Log in</button></p>
             </div>
 
+            <!-- Login Form -->
             <div id="login-form-element">
                 <h2>Login</h2>
                 <form id="login-form" method="post">
@@ -42,27 +45,46 @@
             </div>
         </div>
 
-        <div class="main-page">
-            <h1>Welcome to the Forum</h1>
+        <!-- Main Page -->
+        <div class="main-page" style="display: none;">
+            <h1>Real Time Forum</h1>
             <button id="logout-button">Logout</button>
             <button id="create-post-button">Create Post</button>
             
-            <div class="post-feed">
-                <h2>Recent Posts</h2>
-                <!-- Posts will be dynamically added here -->
+            <div class="content-wrapper">
+                <!-- Left Column: Posts -->
+                <div class="left-column">
+                    <div class="post-feed">
+                        <!-- Posts will be dynamically added here -->
+                    </div>
+                </div>
+                <!-- Right Column: Chat -->
+                <div class="right-column">
+                    <div class="chat-area">
+                        <!-- Chat area content will be dynamically added here -->
+                    </div>
+                    <div class="chat-messages">
+                        <div id="chat-messages"></div>
+                    </div>
+                    <form id="chat-form" style="display: none;">
+                        <input type="text" id="chat-input" placeholder="Type a message..." required>
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
             </div>
-            <div class="chat-area"></div>
         </div>
-
-        <div class="create-post-page">
+        
+        <!-- Create Post Page -->
+        <div class="create-post-page" style="display: none;">
             <h2>Create a New Post</h2>
             <form id="post-form" method="post">
                 <textarea name="content" placeholder="What's on your mind?" required></textarea>
                 <select name="category" required>
                     <option value="">Select Category</option>
-                    <option value="general">General</option>
-                    <option value="tech">Technology</option>
-                    <option value="sports">Sports</option>
+                    <option value="General">General</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Sports">Sports</option>
+                    <option value="News">News</option>
                 </select>
                 <button type="submit">Create Post</button>
             </form>
@@ -70,6 +92,7 @@
         </div>
     </div>
 
+    <!-- Comments Modal -->
     <div id="comments-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -81,6 +104,7 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="regToLog.js"></script>
     <script src="main.js"></script>
 </body>

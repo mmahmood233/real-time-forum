@@ -86,3 +86,14 @@ CREATE TABLE IF NOT EXISTS post_categories (
     FOREIGN KEY (category_id) REFERENCES categories(id),
     PRIMARY KEY (post_id, category_id)
 );
+
+CREATE TABLE IF NOT EXISTS messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender_id INTEGER,
+    receiver_id INTEGER,
+    content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(user_id),
+    FOREIGN KEY (receiver_id) REFERENCES users(user_id)
+);
+

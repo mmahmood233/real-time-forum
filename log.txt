@@ -232,3 +232,134 @@
 2024/08/03 19:13:26 New post created - ID: 4, Content: xxxxxx, Category: tech
 2024/08/03 19:13:35 New comment added - User: xx (ID: 1), Post ID: 4, Content: This is the comm
 2024/08/03 19:14:20 Starting server on :8800
+2024/08/03 19:49:48 Starting server on :8800
+2024/08/03 19:49:58 New comment added - User: xx (ID: 1), Post ID: 4, Content: aaa
+2024/08/03 19:53:17 New post created - ID: 5, Content: wow, Category: general
+2024/08/03 19:54:10 New post created - ID: 6, Content: sasd, Category: News
+2024/08/03 19:54:54 Attempting to remove session from database: JDJhJDEwJGZoU3R5dkdMSkRVbFJRYi93eTF4a08wMnNDMlpGakF5VUtDMk8uRFNqVWFwMEguWVVqWjMu
+2024/08/03 19:54:54 Rows affected: 1
+2024/08/03 19:54:54 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 19:54:54 Error getting session: invalid session
+2024/08/03 19:55:04 Attempting to remove session from database: JDJhJDEwJGFGNGM3dUNXclZVb1MwcnFQanlXdWUxWkpweWZTY00yZkg1TXdvY2pGalRUZWw5UkV4VFky
+2024/08/03 19:55:04 Rows affected: 1
+2024/08/03 19:55:04 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 19:55:04 Error getting session: invalid session
+2024/08/03 22:12:25 Starting server on :8800
+2024/08/03 22:12:40 Attempting to remove session from database: JDJhJDEwJGR2bDFCV09YSGxRakhGQXZpS1NJVGVYT2cybEZkUUpud24yTXdybUpYaGx6bTh2RUZXNklx
+2024/08/03 22:12:40 Rows affected: 1
+2024/08/03 22:12:40 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 22:12:40 Error getting session: invalid session
+2024/08/03 22:22:27 Starting server on :8800
+2024/08/03 22:22:56 Starting server on :8800
+2024/08/03 22:23:14 Received registration request: nickname=aa, age=00, gender=male, firstname=aa, lastname=aa, email=aa@aa.aa
+2024/08/03 22:23:14 New user registered with ID: 1
+2024/08/03 22:23:14 User registered successfully: aa
+2024/08/03 22:23:27 New post created - ID: 1, Content: asasasas, Category: General
+2024/08/03 22:24:30 Starting server on :8800
+2024/08/03 22:24:46 New comment added - User: aa (ID: 1), Post ID: 1, Content: asasasasasasasasasasasasasasasasasasasas
+2024/08/03 22:24:51 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:51 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:52 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:52 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:52 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:53 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:53 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:53 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:53 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:54 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:54 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:54 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:54 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:54 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:55 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:55 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:56 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:57 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:57 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:57 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:58 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:58 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:58 User aa (ID: 1) liked comment 1
+2024/08/03 22:24:59 User aa (ID: 1) disliked comment 1
+2024/08/03 22:24:59 User aa (ID: 1) liked comment 1
+2024/08/03 22:25:00 User aa (ID: 1) liked comment 1
+2024/08/03 22:25:01 User aa (ID: 1) disliked comment 1
+2024/08/03 22:25:02 User aa (ID: 1) liked comment 1
+2024/08/03 22:25:02 User aa (ID: 1) liked comment 1
+2024/08/03 22:35:56 Attempting to remove session from database: JDJhJDEwJE5UNnRSdGRreG1FZ2M5dkJBc0t6SU9aU1dHME9PWS9qNkdlZ1FKS29oVEhlcHgvLnVDOWgy
+2024/08/03 22:35:56 Rows affected: 1
+2024/08/03 22:35:56 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/03 22:35:56 Error getting session: invalid session
+2024/08/03 22:36:19 Received registration request: nickname=xx, age=11, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/08/03 22:36:20 New user registered with ID: 2
+2024/08/03 22:36:20 User registered successfully: xx
+2024/08/03 22:50:54 Starting server on :8800
+2024/08/04 20:03:52 Starting server on :8800
+2024/08/04 20:23:50 Starting server on :8800
+2024/08/04 20:29:47 Starting server on :8800
+2024/08/04 20:34:02 websocket: close 1001 (going away)
+2024/08/04 20:34:03 websocket: close 1001 (going away)
+2024/08/04 20:38:20 websocket: close 1001 (going away)
+2024/08/04 20:38:21 websocket: close 1001 (going away)
+2024/08/04 20:42:22 websocket: close 1001 (going away)
+2024/08/04 20:45:58 websocket: close 1001 (going away)
+2024/08/04 20:46:05 websocket: close 1001 (going away)
+2024/08/04 20:47:08 websocket: close 1001 (going away)
+2024/08/04 20:47:08 websocket: close 1001 (going away)
+2024/08/04 20:47:25 websocket: close 1001 (going away)
+2024/08/04 20:47:26 websocket: close 1001 (going away)
+2024/08/04 20:47:26 websocket: close 1001 (going away)
+2024/08/04 20:57:00 Starting server on :8800
+2024/08/04 20:57:03 websocket: close 1001 (going away)
+2024/08/04 20:57:16 Starting server on :8800
+2024/08/04 20:57:18 invalid session
+2024/08/04 20:57:18 invalid session
+2024/08/04 20:57:28 Received registration request: nickname=xx, age=55, gender=male, firstname=xx, lastname=xx, email=xx@xx.xx
+2024/08/04 20:57:28 New user registered with ID: 1
+2024/08/04 20:57:28 User registered successfully: xx
+2024/08/04 21:11:12 New post created - ID: 1, Content: xxx, Category: Technology
+2024/08/04 21:16:46 Starting server on :8800
+2024/08/04 21:16:52 websocket: close 1001 (going away)
+2024/08/04 21:16:52 websocket: close 1001 (going away)
+2024/08/04 21:16:52 websocket: close 1001 (going away)
+2024/08/04 21:37:03 Starting server on :8800
+2024/08/04 21:37:06 websocket: close 1001 (going away)
+2024/08/04 21:45:08 Starting server on :8800
+2024/08/04 21:45:13 websocket: close 1001 (going away)
+2024/08/04 21:45:14 websocket: close 1001 (going away)
+2024/08/04 21:54:30 Starting server on :8800
+2024/08/04 21:54:32 websocket: close 1001 (going away)
+2024/08/04 21:54:33 websocket: close 1001 (going away)
+2024/08/04 21:54:43 websocket: close 1001 (going away)
+2024/08/04 21:54:43 websocket: close 1001 (going away)
+2024/08/04 21:54:44 websocket: close 1001 (going away)
+2024/08/04 21:54:45 websocket: close 1001 (going away)
+2024/08/04 21:54:45 websocket: close 1001 (going away)
+2024/08/04 21:59:02 Starting server on :8800
+2024/08/04 21:59:06 websocket: close 1001 (going away)
+2024/08/04 21:59:06 websocket: close 1001 (going away)
+2024/08/04 22:02:41 Starting server on :8800
+2024/08/04 22:02:43 websocket: close 1001 (going away)
+2024/08/04 22:02:44 websocket: close 1001 (going away)
+2024/08/04 22:02:44 websocket: close 1001 (going away)
+2024/08/04 22:13:40 Attempting to remove session from database: JDJhJDEwJHB6VENlb2svUnFlN3dpY2dQay53WmVsa2x3VlZRQ3J1R3dtMlNkZUt2ekVwMUZpcUNSMGIu
+2024/08/04 22:13:40 Rows affected: 1
+2024/08/04 22:13:40 http: superfluous response.WriteHeader call from forum/functions.Logout (login.go:79)
+2024/08/04 22:13:40 Error getting session: invalid session
+2024/08/04 22:13:40 websocket: close 1001 (going away)
+2024/08/04 22:13:40 websocket: close 1001 (going away)
+2024/08/04 22:13:40 invalid session
+2024/08/04 22:13:58 New post created - ID: 2, Content: asd, Category: General
+2024/08/04 22:14:16 invalid session
+2024/08/04 22:14:31 Received registration request: nickname=qq, age=55, gender=male, firstname=qq, lastname=qq, email=qq@qq.qq
+2024/08/04 22:14:31 New user registered with ID: 2
+2024/08/04 22:14:31 User registered successfully: qq
+2024/08/04 22:14:42 websocket: close 1001 (going away)
+2024/08/04 22:14:42 websocket: close 1001 (going away)
+2024/08/04 22:15:48 websocket: close 1001 (going away)
+2024/08/04 22:15:48 websocket: close 1001 (going away)
+2024/08/04 22:15:48 websocket: close 1001 (going away)
+2024/08/04 22:15:49 websocket: close 1001 (going away)
+2024/08/04 22:15:49 websocket: close 1001 (going away)
+2024/08/04 22:26:24 Starting server on :8800
+2024/08/04 22:32:06 websocket: close 1001 (going away)

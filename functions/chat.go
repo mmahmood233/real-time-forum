@@ -37,11 +37,6 @@ func HasActiveSession(db *sql.DB, userID int) bool {
     return count > 0
 }
 
-
-
-
-
-
 func GetAllUsersStatus(db *sql.DB) ([]User, error) {
     query := `SELECT user_id, nickname FROM users`
     rows, err := db.Query(query)

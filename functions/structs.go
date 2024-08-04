@@ -84,3 +84,17 @@ type PostCategory struct {
 	PostID     int
 	CategoryID int
 }
+
+type Message struct {
+    ID        int
+    SenderID  int
+    ReceiverID int
+    Content   string
+    CreatedAt time.Time
+}
+
+type Conversation struct {
+    UserID1   int
+    UserID2   int
+    Messages  []Message
+}
