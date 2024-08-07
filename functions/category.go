@@ -48,3 +48,33 @@ func getCategoryID(categoryName string, db *sql.DB) int {
     }
     return categoryID
 }
+
+func GetCategoriesByPostID(postID int, db *sql.DB) ([]Category, error) {
+    query := `
+        SELECT c.cat_id, c.cat_name
+        FROM categories c
+        JOIN post_categories pc ON c.cat_id = pc.category_id
+        WHERE pc.post_id = ?
+    `
+    rows, err := db.Query(query, postID)
+    if err != nil {
+        return nil, err
+    }
+    defer rows.Close()
+
+    var categories []Category
+    for rows.Next() {
+        var c Category
+        if err := rows.Scan(&c.CatID, &c.CatName); err != nil {
+            return nil, err
+        }
+        c.PostID = postID
+        categories = append(categories, c)
+    }
+
+    if err := rows.Err(); err != nil {
+        return nil, err
+    }
+
+    return categories, nil
+}

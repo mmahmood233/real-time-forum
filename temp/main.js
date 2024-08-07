@@ -41,15 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (mainPage) {
             mainPage.style.display = 'block';
             console.log('Main page displayed');
-            
-            // Ensure the post-feed element exists
+           
             if (!document.querySelector('.post-feed')) {
                 console.error('Post feed element not found, creating it');
                 const postFeed = document.createElement('div');
                 postFeed.className = 'post-feed';
                 mainPage.querySelector('.left-column').appendChild(postFeed);
             }
-            
+           
             loadPosts();
             loadChatArea();
             connectWebSocket();
@@ -73,8 +72,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (postFeed) {
                     postFeed.innerHTML = html;
                     console.log('Posts updated');
-                    document.querySelectorAll('.comment-form').forEach(form => {
-                        form.addEventListener('submit', handleCommentSubmit);
+                    document.querySelectorAll('.post').forEach(post => {
+                        const commentsSection = post.querySelector('.comments');
+                        const commentForm = post.querySelector('.comment-form');
+                        if (commentsSection) {
+                            commentsSection.style.display = 'none';
+                        }
+                        if (commentForm) {
+                            commentForm.style.display = 'none';
+                        }
+                        post.addEventListener('click', handlePostClick);
                     });
                     addLikeDislikeListeners();
                 } else {
@@ -85,6 +92,55 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Error loading posts:', error);
             });
+    }
+    
+    function handlePostClick(e) {
+        if (e.target.classList.contains('like-post') || e.target.classList.contains('dislike-post')) {
+            return; // Don't toggle comments when like/dislike buttons are clicked
+        }
+        const commentsSection = this.querySelector('.comments');
+        const commentForm = this.querySelector('.comment-form');
+        if (commentsSection && commentForm) {
+            const isHidden = commentsSection.style.display === 'none';
+            commentsSection.style.display = isHidden ? 'block' : 'none';
+            commentForm.style.display = isHidden ? 'block' : 'none';
+        }
+    }
+    
+
+    function addPostEventListeners() {
+        document.querySelectorAll('.view-comments').forEach(button => {
+            button.addEventListener('click', handleViewComments);
+        });
+        document.querySelectorAll('.comment-form').forEach(form => {
+            form.addEventListener('submit', handleCommentSubmit);
+        });
+        addLikeDislikeListeners();
+    }
+
+    function handleViewComments(e) {
+        const postId = e.target.dataset.postId;
+        const commentsSection = e.target.closest('.post').querySelector('.comments');
+        const commentForm = e.target.closest('.post').querySelector('.comment-form');
+
+        if (commentsSection.style.display === 'none') {
+            loadComments(postId, commentsSection);
+            commentsSection.style.display = 'block';
+            commentForm.style.display = 'block';
+        } else {
+            commentsSection.style.display = 'none';
+            commentForm.style.display = 'none';
+        }
+    }
+
+    function loadComments(postId, commentsSection) {
+        fetch(`/get-comments?postID=${postId}`)
+            .then(response => response.text())
+            .then(html => {
+                commentsSection.innerHTML = html;
+                addLikeDislikeListeners();
+            })
+            .catch(error => console.error('Error loading comments:', error));
     }
 
     function loadChatArea() {
@@ -100,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (chatArea) {
                 chatArea.innerHTML = html;
                 console.log('Chat area updated');
-                chatArea.style.display = 'block'; // Ensure it's visible
+                chatArea.style.display = 'block';
                 chatArea.querySelectorAll('li').forEach(userItem => {
                     userItem.addEventListener('click', function() {
                         const userId = this.dataset.userId;
@@ -158,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(text => {
             console.log('Server response:', text);
-            loadPosts();
+            loadComments(postId, document.querySelector(`.post[data-id="${postId}"] .comments`));
         })
         .catch(error => {
             console.error('Error adding comment:', error);
@@ -297,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error loading message history:', error);
             });
     }
-    
+   
     function appendMessage(content, type) {
         const messageHistory = document.getElementById('chat-messages');
         const messageElement = document.createElement('div');

@@ -363,3 +363,20 @@
 2024/08/04 22:15:49 websocket: close 1001 (going away)
 2024/08/04 22:26:24 Starting server on :8800
 2024/08/04 22:32:06 websocket: close 1001 (going away)
+2024/08/07 20:41:46 Starting server on :8800
+2024/08/07 20:41:49 invalid session
+2024/08/07 20:41:50 invalid session
+2024/08/07 20:51:23 Starting server on :8800
+2024/08/07 20:51:26 invalid session
+2024/08/07 20:51:26 invalid session
+2024/08/07 20:51:34 websocket: close 1001 (going away)
+2024/08/07 20:51:35 websocket: close 1001 (going away)
+2024/08/07 20:51:50 New comment added - User: xx (ID: 1), Post ID: 2, Content: adasd
+2024/08/07 21:01:12 Starting server on :8800
+2024/08/07 21:01:16 websocket: close 1001 (going away)
+2024/08/07 21:03:50 Starting server on :8800
+2024/08/07 21:03:53 websocket: close 1001 (going away)
+2024/08/07 21:04:02 websocket: close 1001 (going away)
+2024/08/07 21:04:02 websocket: close 1001 (going away)
+2024/08/07 21:05:27 Starting server on :8800
+2024/08/07 21:05:30 websocket: close 1001 (going away)

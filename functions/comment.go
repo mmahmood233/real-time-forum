@@ -120,3 +120,33 @@ func GetCommentsByPostID(postID int, db *sql.DB) ([]struct {
 
     return comments, nil
 }
+
+func GetComments(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+    postID, err := strconv.Atoi(r.URL.Query().Get("postID"))
+    if err != nil {
+        http.Error(w, "Invalid post ID", http.StatusBadRequest)
+        return
+    }
+
+    comments, err := GetCommentsByPostID(postID, db)
+    if err != nil {
+        http.Error(w, "Error fetching comments", http.StatusInternalServerError)
+        return
+    }
+
+    var commentsHTML strings.Builder
+    for _, comment := range comments {
+        commentsHTML.WriteString(fmt.Sprintf(`
+            <div class="comment" data-id="%d">
+                <h4>Commented By %s</h4>
+                <p>%s</p>
+                <small>Created at: %s</small>
+                <button class="like-comment" data-comment-id="%d">Like (%d)</button>
+                <button class="dislike-comment" data-comment-id="%d">Dislike (%d)</button>
+            </div>
+        `, comment.CommentID, comment.UserNickname, comment.CommentContent, comment.CreatedAt.Format("2006-01-02 15:04:05"), comment.CommentID, comment.LikeCount, comment.CommentID, comment.DislikeCount))
+    }
+
+    w.Header().Set("Content-Type", "text/html")
+    w.Write([]byte(commentsHTML.String()))
+}

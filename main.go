@@ -53,6 +53,10 @@ func main() {
             forum.HandleLogin(w, r, database)
         }
     })
+    http.HandleFunc("/get-comments", func(w http.ResponseWriter, r *http.Request) {
+        forum.GetComments(w, r, database)
+    })
+    
     http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
         forum.Logout(w, r, database)
     })
