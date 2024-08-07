@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const createPostPage = document.querySelector('.create-post-page');
     const postFeed = document.querySelector('.post-feed');
     const chatArea = document.querySelector('.chat-area');
+    const chatButton = document.getElementById('chat-button');
+    const backToMainFromChat = document.getElementById('back-to-main-from-chat');
+    const chatPage = document.querySelector('.chat-page');
     const registerForm = document.getElementById('register-form');
     const loginFormElement = document.getElementById('login-form-element');
     const createPostButton = document.getElementById('create-post-button');
@@ -13,11 +16,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const goToRegisterButton = document.getElementById('go-to-register');
     let socket;
     let currentChatUser = null;
+    chatButton.addEventListener('click', toggleChatArea);
 
     function hideAllSections() {
         authContainer.style.display = 'none';
         mainPage.style.display = 'none';
         createPostPage.style.display = 'none';
+        chatPage.style.display = 'none';
     }
 
     function showRegisterForm() {
@@ -54,6 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
             connectWebSocket();
         } else {
             console.error('Main page element not found');
+        }
+    }
+
+    function toggleChatArea() {
+        if (chatArea.style.display === 'none') {
+            loadChatArea();
+            chatArea.style.display = 'block';
+        } else {
+            chatArea.style.display = 'none';
         }
     }
 
@@ -132,52 +146,59 @@ document.addEventListener('DOMContentLoaded', function () {
             commentForm.style.display = 'none';
         }
     }
+    
+    chatButton.addEventListener('click', showChatPage);
+    backToMainFromChat.addEventListener('click', showMainPage);
 
-    function loadComments(postId, commentsSection) {
-        fetch(`/get-comments?postID=${postId}`)
+    function toggleChatArea() {
+        if (chatArea.style.display === 'none') {
+            loadChatArea();
+            chatArea.style.display = 'block';
+        } else {
+            chatArea.style.display = 'none';
+        }
+    }
+    
+    function loadChatArea() {
+        fetch('/get-chat-area')
             .then(response => response.text())
             .then(html => {
-                commentsSection.innerHTML = html;
-                addLikeDislikeListeners();
-            })
-            .catch(error => console.error('Error loading comments:', error));
-    }
-
-    function loadChatArea() {
-        console.log('Loading chat area...');
-        fetch('/get-chat-area', {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then(response => response.text())
-        .then(html => {
-            console.log('Received chat HTML:', html);
-            const chatArea = document.querySelector('.chat-area');
-            if (chatArea) {
+                const chatArea = document.querySelector('.chat-area');
                 chatArea.innerHTML = html;
-                console.log('Chat area updated');
-                chatArea.style.display = 'block';
+                console.log('Chat area populated:', html);
                 chatArea.querySelectorAll('li').forEach(userItem => {
                     userItem.addEventListener('click', function() {
                         const userId = this.dataset.userId;
-                        console.log('User clicked:', userId);
                         loadMessageHistory(userId);
                     });
                 });
-            } else {
-                console.error('Chat area element not found');
-            }
-        })
-        .catch(error => {
-            console.error('Error loading chat area:', error);
-        });
-    }
+            })
+            .catch(error => console.error('Error loading chat area:', error));
+    }       
+    
 
     function showChatWindow(userId) {
         const chatWindow = document.querySelector('.chat-window');
         chatWindow.style.display = 'block';
         loadMessageHistory(userId);
+        connectWebSocket(); 
+
     }
+
+    function showChatPage() {
+        console.log('Showing chat page');
+        hideAllSections();
+        chatPage.style.display = 'block';
+        const chatArea = document.querySelector('.chat-area');
+        chatArea.innerHTML = '<p>Loading users...</p>';
+        chatArea.style.display = 'block'; // Ensure chat area is visible
+        setTimeout(() => {
+            loadChatArea();
+            connectWebSocket();
+        }, 100);
+    }
+    
+    
 
     function handleCommentSubmit(e) {
         e.preventDefault();
